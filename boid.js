@@ -5,20 +5,24 @@ function Boid() {
 	this.force2 = createVector(0,0);
 	this.acc = createVector(random(.1, .9), random(-.9, .1));
 	this.vel = createVector(random(-3, 3), random(-3, 3));
-	this.loc = createVector(random(width), random(height));
+	this.loc = createVector(random(w), random(h));
 
-
-
+	this.run = function() {
+		this.update(this.force);// default = (0,0)
+		this.checkEdges();
+		this.render();
+	}
 	this.render = function() {
-
 		push();
-  		fill(200, 0, 100);
-  		noStroke();
-  		ellipse(this.loc.x, this.loc.y, 10, 10);
-  	pop();
+		fill(200, 0, 100);
+		noStroke();
+		ellipse(this.loc.x, this.loc.y, 50, 50);
+		pop();
 
 	}
-
+	this.applyForce = function (f) {
+		this.acc.add(f);
+	}
 	this.update = function(force) {
 		this.force = force; // Incase we want to send f
 		this.force2 = force; // Incase we want to send f
@@ -42,7 +46,7 @@ function Boid() {
 				this.vel.add(this.force);
 				this.vel.limit(random(1,2));
 			}
-		  else if(this.loc.dist(attractors[i].loc) < 150){
+			else if(this.loc.dist(attractors[i].loc) < 150){
 				this.applyForce(this.force2);
 				//this.vel.add(this.force2.mult(state));
 				this.vel.limit(random(3,6));
@@ -55,12 +59,20 @@ function Boid() {
 				this.vel.limit(1);
 			}
 		}
-			this.loc.add(this.vel);
-			this.acc.mult(0);
+		this.loc.add(this.vel);
+		this.acc.mult(0);
 		//bounce off walls
-		this.checkEdges = function() {
-			if (this.loc.x > width || this.loc.x < 0) this.vel.x *= -1;
-			if (this.loc.y > height || this.loc.y < 0) this.vel.y *= -1;
+
+	}
+	this.checkEdges = function() {
+		if (this.loc.x > width || this.loc.x < 0) {
+			//console.log("velx = " + this.vel.x);
+			this.vel.x *= (-1);
+		}
+
+		if (this.loc.y > height || this.loc.y < 0) {
+			this.vel.y *= (-1);
 		}
 	}
+
 }
