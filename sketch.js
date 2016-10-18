@@ -45,7 +45,7 @@ function setup(){
 function draw(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  background(80);
+  background(255);
 
   if(!started && !ended){
     menu();
@@ -74,7 +74,7 @@ function runBoids(){
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function menu(){
-  fill(50, 70, 255);
+  fill(30, 100, 255);
   rect(w/2 - 50, h/2 - 25, 100, 50);
   textSize(20);
   fill(255, 0, 100);
@@ -99,10 +99,11 @@ function menu(){
 
 
 function layout(){
+  fill(30, 100, 255);
+  rect(400,100,400,200);
   runBoids();
+  player.run();
   noStroke();
-  fill(200, 50, 200);
-  rect(400,100,200,100);
   head.run();
   dragSegment(0, head.loc.x, head.loc.y);
   for( var i=0; i < x.length-1; i++) {
@@ -131,9 +132,10 @@ function segment(x, y, a, ind) {
   push();
   translate(x, y);
   strokeWeight(15-(ind/2));
-  fill(50, 70, 255);
+  fill(30, 255, 0);
   //(255-10*ind, 0, 0, 200-ind*10);
-  stroke(255,0,0,100);
+  //stroke(255,0,0,100);
+  stroke(20,255,100,200);
   rotate(a);
   line(0, 0, segLength, 0);
   pop();

@@ -14,9 +14,9 @@ function Boid() {
 	}
 	this.render = function() {
 		push();
-		fill(200, 0, 100);
+		fill(255, 0, 100);
 		noStroke();
-		ellipse(this.loc.x, this.loc.y, 50, 50);
+		ellipse(this.loc.x, this.loc.y, 15, 15);
 		pop();
 
 	}
@@ -54,6 +54,9 @@ function Boid() {
 				this.applyForce(this.force2);
 				//this.vel.add(this.force2.mult(state));
 				this.vel.limit(random(1,2));
+			}
+			else if (true) {
+
 			}else{
 				//this.vel.add(this.force);
 				this.vel.limit(1);
